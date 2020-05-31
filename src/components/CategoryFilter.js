@@ -1,9 +1,9 @@
 import React from 'react';
 
-function CategoryFilter() {
+function CategoryFilter(props) {
   return(
     <div>
-      <h1>Categories</h1>
+     <h1>Categories</h1>
     </div>
   )
 }

@@ -1,16 +1,21 @@
 import React from "react";
-import DogDetails from "./DogDetails";
+// import PropTypes from 'prop-types';
 
-function Product(props) {
-  const dogDisplay = DogDetails.map(dog => dog)
+const Product = (props) => {
+  const dogArray = props.dogPics
+
   return (
-    <div>
-      <img src={props.image.message} alt="dog" />
-      <h1>Dog category: </h1>
-      <p>Description:{dogDisplay.description} </p>
-      <h3>Price</h3>
+    <div id="imageContainer">
+      <img src={dogArray} alt="dog" />
+      <h3>Product Category: </h3>
+      <p>Product Description</p>
+      <h5>Price</h5>
     </div>
   );
-}
+};
+
+// Product.propTypes = {
+//   dogPics: PropTypes.array.isRequired
+// }
 
 export default Product;
