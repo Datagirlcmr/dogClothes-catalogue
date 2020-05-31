@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 import CategoryFilter from "./CategoryFilter";
-import ProductHandle from "../containers/ProductHandle";
+import ProductList from "../containers/ProductList";
 
 function App() {
   return (
@@ -10,9 +10,10 @@ function App() {
         <h1>Products</h1>
         <CategoryFilter />
       </div>
-      <ProductHandle />
+      <ProductList />
     </div>
   );
 }
+
 
  export default App;
