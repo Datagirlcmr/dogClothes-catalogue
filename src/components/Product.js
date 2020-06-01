@@ -1,19 +1,12 @@
 import React from "react";
 
 const Product = (props) => {
-  const breedObject = props.breeds;
-  // console.log(breedObject)
-  const breedArray = Object.entries(breedObject).map(item => item);
-  console.log (breedArray);
-
-  return(
+  return (
     <div>
-      <h1>Images</h1>
-      
+      <h1>Breed: {}</h1>
+      <img src={props.image} alt="dogImages" />
     </div>
-  )
+  );
 };
-
-
 
 export default Product;
