@@ -1,6 +1,8 @@
-.navbar {
-  width: 50%;
+.center{
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: center;
+}
+
+.width-100 {
+  width: 100px;
 }

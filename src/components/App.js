@@ -1,11 +1,15 @@
 import React from "react";
 import "../App.css";
-import ProductList from "../containers/ProductList";
+import ProductContainer from "../containers/ProductContainer";
 
 
 function App() {
   return(
-    <ProductList />
+    <div>
+      <h1>Breeds</h1>
+      <ProductContainer />
+    </div>
+    
   ) 
 }
 
