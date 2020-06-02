@@ -1,5 +1,6 @@
 import React from "react";
 import BreedComponent from "../components/BreedComponent";
+import ImageComponent from '../components/ImageComponent';
 
 class ProductContainer extends React.Component {
   constructor(props) {
@@ -12,37 +13,42 @@ class ProductContainer extends React.Component {
   }
 
   componentDidMount() {
-    const allBreedsEndpoint = "https://dog.ceo/api/breeds/list/all";
-    fetch(allBreedsEndpoint)
-      .then((response) => response.json())
-      .then((data) => {
-        const { message } = data;
-        const breedsCat = Object.keys(message);
-        this.setState({
-          breed: breedsCat,
-        });
-      })
-      .catch((error) => console.log(error));
-
-    const breedName = this.state.breed;
-    breedName.forEach((breed) => {
-      const allImagesEndpoint = `https://dog.ceo/api/breed/${breed}/images`;
-      fetch(allImagesEndpoint)
+    const getallBreeds =()=> {
+      const coverImg = [];
+      const allBreedsEndpoint = "https://dog.ceo/api/breeds/list/all";
+      fetch(allBreedsEndpoint)
         .then((response) => response.json())
         .then((data) => {
           const { message } = data;
-
-          // const firstImages = [];
-          // breedName.forEach(breed => {
-          //   let [coverImg, ...rest] = message;
-          //   firstImages.push(coverImg);
-          // });
+          let breedsCat = Object.keys(message);
+      
           this.setState({
-            images: message,
+            breed: breedsCat,
+          })
+
+          breedsCat.forEach((breed) => {
+            (async () => {
+              const breedImages = await getImagebyBreed(breed);
+              coverImg.push(breedImages[0]);
+              this.setState({
+                images: coverImg
+              })
+            })();
           });
         })
         .catch((error) => console.log(error));
-    });
+    }
+
+    async function getImagebyBreed(breed) {
+      // console.log(breed)
+      const allImagesEndpoint = `https://dog.ceo/api/breed/${breed}/images`;
+      const response = await fetch(allImagesEndpoint);
+      const data = await response.json();
+      const { message } = data;
+      return await message;
+      // console.log(message)
+    }
+    getallBreeds();
   }
 
   // handleClick() {
@@ -53,7 +59,7 @@ class ProductContainer extends React.Component {
     return (
       <div>
         <BreedComponent breeds={this.state.breed} />
-        {console.log(this.state.images)}
+        <ImageComponent images={this.state.images} />
       </div>
     );
   }

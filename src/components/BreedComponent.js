@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProductComponent(props) {
+function BreedComponent(props) {
   return (
     <div className="center">
       <select className="width-100">
@@ -13,4 +13,4 @@ function ProductComponent(props) {
   );
 }
 
-export default ProductComponent;
+export default BreedComponent;
