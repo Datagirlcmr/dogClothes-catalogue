@@ -1,6 +1,6 @@
 import React from "react";
 import BreedComponent from "../components/BreedComponent";
-import ImageComponent from '../components/ImageComponent';
+import ImageComponent from "../components/ImageComponent";
 
 class ProductContainer extends React.Component {
   constructor(props) {
@@ -10,10 +10,11 @@ class ProductContainer extends React.Component {
       breed: [],
       images: [],
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    const getallBreeds =()=> {
+    const getallBreeds = () => {
       const coverImg = [];
       const allBreedsEndpoint = "https://dog.ceo/api/breeds/list/all";
       fetch(allBreedsEndpoint)
@@ -21,45 +22,49 @@ class ProductContainer extends React.Component {
         .then((data) => {
           const { message } = data;
           let breedsCat = Object.keys(message);
-      
+
           this.setState({
             breed: breedsCat,
-          })
+          });
 
           breedsCat.forEach((breed) => {
             (async () => {
               const breedImages = await getImagebyBreed(breed);
-              coverImg.push(breedImages[0]);
+              let [firstImg, ...rest] = breedImages;
+              coverImg.push(firstImg);
+              rest = this.handleClick;
               this.setState({
-                images: coverImg
-              })
+                images: coverImg,
+              });
             })();
           });
         })
         .catch((error) => console.log(error));
-    }
+    };
 
     async function getImagebyBreed(breed) {
-      // console.log(breed)
       const allImagesEndpoint = `https://dog.ceo/api/breed/${breed}/images`;
       const response = await fetch(allImagesEndpoint);
       const data = await response.json();
       const { message } = data;
       return await message;
-      // console.log(message)
     }
     getallBreeds();
   }
 
-  // handleClick() {
-
-  // }
+  handleClick() {
+    console.log("ok");
+  }
 
   render() {
     return (
       <div>
         <BreedComponent breeds={this.state.breed} />
-        <ImageComponent images={this.state.images} />
+        <ImageComponent
+          images={this.state.images}
+          breeds={this.state.breed}
+          onClick={this.handleClick}
+        />
       </div>
     );
   }

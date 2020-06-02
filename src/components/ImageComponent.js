@@ -1,10 +1,16 @@
 import React from 'react';
 
-function ImageComponent(props) {
+function ImageComponent({images, breeds, onClick}) {
   return(
-    <div>
-      {props.images.map(imgsrc => (
-        <img className="w-100" src={imgsrc} alt="dogs"></img>
+    <div className="imgs-disp">
+      {images.map(imgsrc => (
+        <div className=""> 
+        <img className="img-ec" 
+        key={imgsrc} 
+        src={imgsrc}
+        onClick={onClick} 
+        alt={imgsrc}></img>
+        </div>
       ))}   
     </div>
   )

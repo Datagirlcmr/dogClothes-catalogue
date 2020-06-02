@@ -1,11 +1,11 @@
 import React from "react";
 
-function BreedComponent(props) {
+function BreedComponent({breeds}) {
   return (
-    <div className="center">
-      <select className="width-100">
-        <option value="All">All</option>
-        {props.breeds.map((el) => (
+    <div className="select">
+      <select className="card">
+        <option value="All">Select a Breed</option>
+        {breeds.map((el) => (
           <option key={el} value={el}>{el}</option>
         ))}
       </select>
